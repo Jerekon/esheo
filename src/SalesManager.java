@@ -1,12 +1,36 @@
+public class SalesManager {
+    protected long
+            [] sales;
 
-import java.util.Arrays;
+    public SalesManager(long[] sales) {
+        this.sales = sales;
+    }
 
-public class Main {
-    public static void main(String[] args) {
-        SalesManager salesManager = new SalesManager(new long[]{11, 21, 48, 34, 14, 1, 42,8});
-        System.out.println();
-        System.out.println("\"Analysis of sales statistics\"");
-        System.out.printf("In the specified list %s we get the maximum amount of sales : %s у.е.%n", Arrays.toString(salesManager.sales), salesManager.max());
-        System.out.println("Average calculation: " + salesManager.cropAverage() + " у.е.");
+    public long max() {
+        long max = -1;
+        for (long sale : sales) {
+            if (sale > max) {
+                max = sale;
+            }
+        }
+        return max;
+    }
+
+    public long min() {
+        long min = this.max();
+        for (long sale : sales) {
+            if (sale < min) {
+                min = sale;
+            }
+        }
+        return min;
+    }
+
+    public long cropAverage() {
+        long sum = 0;
+        for (long sale : sales) {
+            sum += sale;
+        }
+        return (sum - min() - max()) / (sales.length - 2);
     }
 }
